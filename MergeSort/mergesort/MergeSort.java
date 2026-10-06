@@ -36,7 +36,42 @@ public class MergeSort {
 		//*  4. Replace the original array section with the merged     *
 		//*     array.                                                 *
 		//**************************************************************
-
+		if(left < right) {
+			int middle = (left + right) / 2;
+			mergeSort(theArray, left, middle);
+			mergeSort(theArray, middle + 1, right);
+			
+			int[] temp = new int[right - left + 1];
+			
+			int i = left; 
+			int j = middle + 1;
+			int k = 0;
+			
+			while(i <= middle && j <= right) {
+				if(theArray[i] < theArray[j]) {
+					temp[k] = theArray[i];
+					i++;
+				}
+				else {
+					temp[k] = theArray[j];
+					j++;
+				}
+				k++;
+			}
+			while(i <= middle) {
+				temp[k] = theArray[i];
+				i++;
+				k++;
+			}
+			while(j <= right) {
+				temp[k] = theArray[j];
+				j++;
+				k++;
+			}
+			for(int x = 0; x < temp.length; x++) {
+				theArray[left + x] = temp[x];
+			}
+		}
 	}
 	
 	public static void mergeSort(int[] array) {
